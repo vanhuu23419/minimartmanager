@@ -1,0 +1,138 @@
+
+$body-bg: #f5f5f5;
+$dark-blue: #353057;
+$bamboo-green: #22DB9C;
+
+body {
+    min-height: 100vh;
+    background-color: $body-bg;
+    font-family: 'Segoe UI', 'san-serif';
+}
+
+#layout {
+    display: flex;
+}
+
+button {
+    border:none;
+    outline: none;
+    background-color: unset;
+}
+
+.bg-green { background-color: $bamboo-green;}
+
+header {
+
+    background-color: white;
+    padding: 10px 20px;
+
+    #header-nav {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        & > li.nav-item {
+            margin: 0 20px;
+            padding: 0px;
+
+            &.active, &:hover {
+                & > a.nav-link {
+                    background-color: $dark-blue;
+                    color: white;
+                    box-shadow: 3px 3px 6px rgb(218, 218, 218);
+                }
+            }
+
+            &:hover {
+                .dropdown-menu {
+                    display: block;
+                }
+            }
+
+            & > a.nav-link {
+                color: black;
+                padding: 8px 16px;
+                display: flex;
+                column-gap: 8px;
+                border-radius: 10px;
+                font-size: 14px;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+
+            .dropdown-menu {
+                width: max-content;
+                margin-top: 3px;
+                li.nav-item {
+                    a.nav-link {
+                        padding: 10px 20px;
+                        opacity: 0.5;
+                        color: black;
+
+                        &.active, &:hover {
+                            background-color: #f5f5f5;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #user {
+        #user-thumb {
+            width: 40px;
+            height:40px;
+            border-radius: 10rem;
+            box-shadow: 3px 3px 6px rgb(216, 216, 216);
+            object-fit: cover;
+            object-position: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+}
+
+main {
+
+    #page-title {
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+
+    #page-search {
+
+        form {
+            position: relative;
+        }
+
+        input[name="search"] {
+
+            border: none;
+            outline:none;
+            padding: 8px 20px;
+            padding-right: 40px;
+            font-size: 14px;
+            width: 300px;
+            box-shadow: 3px 3px 6px rgb(204, 204, 204);
+            box-sizing: border-box;
+
+        }
+
+        button[type="submit"] {
+            position: absolute;
+            right: 6px;
+            font-size: 20px;
+            top: 3px;
+        }
+    }
+}
