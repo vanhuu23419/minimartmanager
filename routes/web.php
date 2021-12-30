@@ -21,7 +21,7 @@ use App\Http\Requests\Auth\RoleClaims\Claims;
 */
 
 Route::get('/', function () {
-    return redirect('/product/index');
+    return redirect('/category/index');
 });
 
 
@@ -37,10 +37,10 @@ Route::any('/product/destroy', [ProductController::class, 'destroy'])->name('pro
 /**
  * Category
  */
-// Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
 // //->middleware(['auth', 'authorize.route'])->name( Claims::ProductIndex );
-// Route::get('/category/edit/{flag}/{id?}', [CategoryController::class, 'edit'])->name('category.edit');
-// Route::post('/category/store/{flag}/{id?}', [CategoryController::class, 'store'])->name('category.store');
-// Route::any('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+Route::get('/category/edit/{flag}/{id?}', [CategoryController::class, 'edit'])->name('category.edit');
+Route::post('/category/store/{flag}/{id?}', [CategoryController::class, 'store'])->name('category.store');
+Route::any('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 require __DIR__.'/auth.php';

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="./images/logo.png" type="image/png">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <title>Minimart Manager</title>
 
     <!-- Bootstrap CSS CDN -->

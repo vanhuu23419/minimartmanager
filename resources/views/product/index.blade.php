@@ -55,7 +55,7 @@
                 onAdd: function (event) {},
                 onEdit: function (event) {
                     var selected = this.getSelection()[0];
-                    window.location.href = `/product/edit/${selected}`;
+                    window.location.href = `/product/edit/modify/${selected}`;
                 },
                 msgDelete: 'Bạn có muốn xóa {{ $tableName }} đã chọn?',
                 onDelete: function (event) {

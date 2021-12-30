@@ -28,7 +28,7 @@ class InitialTables extends Migration
             $table->string('unit_id')->nullable();
             $table->string('thumb_path')->nullable();
             $table->string('description', 255)->nullable();
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
