@@ -15,10 +15,11 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
-    require('autoprefixer'),
+    //require('autoprefixer'),
 ]);
 
-mix.js('resources/js/main.js', 'public/js');
+mix.scripts(['resources/js/main.js'], 'public/js/main.js');
 
 mix.sass('resources/css/main.scss', 'public/css')
-    .sass('resources/css/w2ui-custom.scss', 'public/css');
+    .sass('resources/css/w2ui-custom.scss', 'public/css')
+    .sass('resources/css/sell.scss', 'public/css');

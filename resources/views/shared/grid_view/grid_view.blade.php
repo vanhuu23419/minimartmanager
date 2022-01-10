@@ -16,14 +16,18 @@
 <div class="d-flex align-items-center">
     <div id="page-title" class="d-flex align-items-center">
         <h1 class="m-0"> {{ $pageTitle }}</h1>
+
+        @if (!isset($create) || $create)
         <a href="/{{ $router }}/edit/create"class="px-14 py-6 bg-green text-white rounded-pill ms-20 text-decoration-none"> 
             <span class="d-inline-flex align-items-center fs-14">
                 <i class="ri-add-box-line me-8 d-inline-flex align-items-center fs-16"></i>
                 Tạo mới 
             </span>
         </a>
+        @endif
     </div>
 
+    @if (!isset($search) || $search)
     <div id="page-search" class="ms-auto">
         <form action="{{ $route }}">
             @csrf
@@ -31,6 +35,7 @@
             <button type="submit"><i class="ri-search-line"></i></button>
         </form>
     </div>
+    @endif
 </div>
 
 <div id="grid" class="mt-30" style="width: 100%; height: 500px;"></div>

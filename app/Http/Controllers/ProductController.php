@@ -115,8 +115,10 @@ class ProductController extends Controller
             if ($flag == 'modify')
             {
                 $currentThumb = Product::whereRaw("id = {$id}")->first()->thumb_path;
-                $currentThumb = storage_path('app').'/public/'.$currentThumb;
-                File::delete($currentThumb);
+                if ($currentThumb != 'product_img/default.jpg') {
+                    $currentThumb = storage_path('app').'/public/'.$currentThumb;
+                    File::delete($currentThumb);
+                }
             }
             // Save new thumbnail file ( in storage/public/product_img )
             $filePath = $req->file("thumbnail")->store( 'public/product_img' );

@@ -1,0 +1,294 @@
+.fw-500 {
+  font-weight: 500;
+}
+
+body {
+  height: 100vh;
+  background-color: #ebebeb;
+  font-family: "Segoe UI", "san-serif";
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dddddd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #929292;
+}
+
+#layout {
+  display: flex;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: unset;
+}
+button.default-btn:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.bg-blue {
+  background-color: #6C57FF;
+}
+
+.bg-red {
+  background-color: #FF7F57;
+}
+
+.bg-green {
+  background-color: #22DB9C;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+header {
+  background-color: white;
+  padding: 10px 20px;
+}
+header #header-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+header #header-nav > li.nav-item {
+  margin: 0 20px;
+  padding: 0px;
+}
+header #header-nav > li.nav-item.active > a.nav-link, header #header-nav > li.nav-item:hover > a.nav-link {
+  background-color: #353057;
+  color: white;
+  box-shadow: 3px 3px 6px #dadada;
+}
+header #header-nav > li.nav-item:hover .dropdown-menu {
+  display: block;
+}
+header #header-nav > li.nav-item > a.nav-link {
+  color: black;
+  padding: 8px 16px;
+  display: flex;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+header #header-nav > li.nav-item > a.nav-link i {
+  font-size: 16px;
+}
+header #header-nav > li.nav-item .dropdown-menu {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-top: 3px;
+}
+header #header-nav > li.nav-item .dropdown-menu li.nav-item a.nav-link {
+  padding: 10px 20px;
+  opacity: 0.5;
+  color: black;
+}
+header #header-nav > li.nav-item .dropdown-menu li.nav-item a.nav-link.active, header #header-nav > li.nav-item .dropdown-menu li.nav-item a.nav-link:hover {
+  background-color: #f5f5f5;
+  opacity: 1;
+}
+header #user #user-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 10rem;
+  box-shadow: 3px 3px 6px #d8d8d8;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+header #user a {
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  margin-top: 3px;
+}
+main #categories {
+  background-color: white;
+  width: 180px;
+}
+main #categories a.category_item {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+}
+main #categories a.category_item.active, main #categories a.category_item:hover {
+  background-color: #f5f5f5;
+  color: #353057;
+}
+main #products {
+  margin-left: 3px;
+}
+main #products .products {
+  background-color: white;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-bottom: 20px;
+}
+main #products .products #product_search {
+  position: relative;
+}
+main #products .products #product_search input {
+  width: 230px;
+  background-color: #F5F5F5;
+  border-radius: 10rem;
+  font-size: 14px;
+  padding: 6px 16px;
+  padding-right: 36px;
+  border: none;
+  outline: none;
+}
+main #products .products #product_search button {
+  position: absolute;
+  right: 8px;
+  top: 3px;
+}
+main #products .products .product_item {
+  width: 15%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main #products .products .product_item.active img.thumbnail {
+  border: 2px solid #22DB9C;
+  transform: scale(1.05);
+  padding: 3px;
+}
+main #products .products .product_item img.thumbnail {
+  width: 80px;
+  height: 80px;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  background-color: #f5f5f5;
+  border-radius: 10rem;
+}
+main #products .products .product_item span.product_name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 16px;
+  font-size: 13px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  text-align: center;
+}
+main #products .product_selection {
+  margin-top: 3px;
+  height: 100px;
+}
+main #products .product_selection .selected-product {
+  background-color: white;
+}
+main #products .product_selection .selected-product img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10rem;
+  background-color: #f5f5f5;
+  display: inline-block;
+}
+main #products .product_selection .selected-product .product-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+main #products .product_selection .add-to-receipt {
+  background-color: white;
+  margin-left: 3px;
+  width: 300px;
+}
+main #products .product_selection .add-to-receipt .input {
+  position: relative;
+}
+main #products .product_selection .add-to-receipt .input input {
+  width: 140px;
+  border: none;
+  outline: none;
+  background-color: #EFEFEF;
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+main #products .product_selection .add-to-receipt .input .product-unit {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background-color: #EFEFEF;
+  padding: 0.2rem;
+}
+main #receipt {
+  width: 330px;
+  margin-left: 3px;
+}
+main #receipt .receipt_items {
+  background-color: white;
+  overflow-y: scroll;
+}
+main #receipt .receipt_items .item {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed grey;
+}
+main #receipt .receipt_items .item:last-of-type {
+  margin-bottom: 0px;
+  border-bottom: none;
+}
+main #receipt .receipt_items .item .product-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+main #receipt .receipt_items .item button.remove {
+  opacity: 0.5;
+}
+main #receipt .receipt_items .item button.remove:hover {
+  opacity: 1;
+}
+main #receipt .receipt_summary {
+  margin-top: 3px;
+  background-color: white;
+  height: 48px;
+}
+main #receipt .receipt_controls {
+  margin-top: 3px;
+  background-color: white;
+  height: 330px;
+}
+main #receipt .receipt_controls input {
+  outline: none;
+  border: none;
+  padding: 4px 6px;
+}
+main #receipt .receipt_controls input#received {
+  background-color: #EFEFEF;
+}

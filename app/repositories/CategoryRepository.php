@@ -68,12 +68,13 @@ class CategoryRepository
 
     public static function deleteById($id)
     {
-        return DB::table('Categories')->whereRaw("id = {$id}")->delete() > 0;
+        DB::table('Categories')->whereRaw("id = {$id}")->delete();
+        DB::table('ProductCategories')->whereRaw("category_id = {$id}")->delete();
     }
 
     public static function deleteByIds($ids)
     {
-        $ids = implode(',', $ids);
-        return DB::table('Categories')->whereRaw("id IN ({$ids})")->delete() > 0;
+        DB::table('Categories')->whereRaw("id IN ({$ids})")->delete();
+        DB::table('ProductCategories')->whereRaw("category_id IN ({$ids})")->delete();
     }
 }

@@ -26,3 +26,8 @@ function removeVietnameseTones(str) {
     str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
     return str;
 }
+
+function toCurrency(amount){
+    var result = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    return result.substr(0, result.length - 3); 
+}

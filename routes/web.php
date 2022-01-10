@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\SellController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Requests\Auth\RoleClaims\Claims;
 
 
@@ -21,7 +23,7 @@ use App\Http\Requests\Auth\RoleClaims\Claims;
 */
 
 Route::get('/', function () {
-    return redirect('/category/index');
+    return redirect('/receipt');
 });
 
 
@@ -42,5 +44,20 @@ Route::get('/category/index', [CategoryController::class, 'index'])->name('categ
 Route::get('/category/edit/{flag}/{id?}', [CategoryController::class, 'edit'])->name('category.edit');
 Route::post('/category/store/{flag}/{id?}', [CategoryController::class, 'store'])->name('category.store');
 Route::any('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+/**
+ * Sell
+ */
+Route::get('/sell', [SellController::class, 'index'])->name('sell.index');
+Route::post('/sell/products', [SellController::class, 'products'])->name('sell.products');
+Route::post('/sell/addToReceipt', [SellController::class, 'addToReceipt'])->name('sell.addToReceipt');
+Route::post('/sell/saveReceipt', [SellController::class, 'saveReceipt'])->name('sell.saveReceipt');
+Route::get('/sell/printReceipt/{id}', [SellController::class, 'printReceipt'])->name('sell.printReceipt');
+
+/**
+ * Receipt
+ */
+Route::get('/receipt', [ReceiptController::class, 'index'])->name('receipt.index');
+Route::post('/receipt/destroy', [ReceiptController::class, 'destroy'])->name('receipt.destroy');
 
 require __DIR__.'/auth.php';

@@ -33,7 +33,7 @@
 
                         <ul class="dropdown-menu">
                             <li class="nav-item"><a href="{{ route('product.index') }}" class="nav-link">Sản phẩm</a></li>
-                            <li class="nav-item"><a href="" class="nav-link">Danh mục</a></li>
+                            <li class="nav-item"><a href="{{ route('category.index') }}" class="nav-link">Danh mục</a></li>
                             <li class="nav-item"><a href="" class="nav-link">Nhập hàng</a></li>
                         </ul>
                     </li>
