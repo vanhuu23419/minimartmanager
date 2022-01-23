@@ -8,16 +8,16 @@ use App\Models\ProductCategory;
 use App\Models\ProductUnit;
 use Illuminate\Support\Facades\DB;
 
-class CategoryRepository 
+class UserRepository 
 {
     public static function find($opt, &$total = null)
     {
         // The query options
         $options = [
             'search' => null,
-            'searchBy' => ['categories.name'],
+            'searchBy' => ['users.name', 'users.email'],
             'paged' => 1,           // Current page - for pagination calculation
-            'pageSize' => 30,      // Nums of categories per page - for pagination calculation
+            'pageSize' => 30,      // Nums of users per page - for pagination calculation
         ];
         // Assign request params to options
         $options = collect($options)->replace( collect($opt)->only(array_keys($options)) );
@@ -25,13 +25,12 @@ class CategoryRepository
         /* Build the Query */
 
         $query = 
-            DB::table('Categories')
+            DB::table('Users')
             ->selectRaw('
-                Categories.id, Categories.name,
-                COUNT( ProductCategories.product_id ) as num_products
+                Users.*,
+                UserRoles.role
             ')
-            ->leftJoin('ProductCategories', 'Categories.id', '=', 'ProductCategories.category_id' )
-            ->groupBy(['Categories.id', 'Categories.name']);
+            ->leftJoin('UserRoles', 'Users.id', '=', 'UserRoles.user_id' );
 
         if ($options['search'])
         {
@@ -46,7 +45,7 @@ class CategoryRepository
             $total = $countQuery[0]->total;
         }
         $query = $query
-            ->orderByRaw('categories.id')
+            ->orderByRaw('Users.id')
             ->skip(($options['paged'] - 1) * $options['pageSize'])
             ->take($options['pageSize']);
         return $query->get();

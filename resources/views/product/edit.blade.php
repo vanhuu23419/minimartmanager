@@ -5,75 +5,80 @@
 @extends('layouts.layout')
 @section('content')
 
-<div id="page-title" class="d-flex align-items-center">
-    <h1 class="m-0"> {{ $pageTitle }}</h1>
+<div class="container mt-40">
+
+    <div id="page-title" class="d-flex align-items-center">
+        <h1 class="m-0"> {{ $pageTitle }}</h1>
+    </div>
+
+    <form class="d-flex mt-40">
+
+        <div class="d-flex flex-column me-5 mt-2">
+            <img id="thumbnail" src="<?php echo asset('storage/'.$product->thumb_path); ?>" width="150" height="150">
+            <input id="thumbnail_input" type="file" name="thumbnail" accept="image/x-png,image/gif,image/jpeg" hidden>
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" onclick="$('#thumbnail_input').click()"> 
+                Chọn hình
+            </button>
+        </div>
+
+        <div class="d-flex flex-column"  style="width:400px">
+            <div class="mb-10">
+                <label class="d-block fw-bold mb-6 fs">Tên sản phẩm (<span class="text-danger">*</span>):</label>
+                <input id="name" name="name" class="w-100" value="{{ $product->name }}">
+                <span class="d-block validation form-text text-danger d-none" for="name"></span>
+            </div>
+        
+            <div class="d-flex mb-10">
+                <div class="me-3">
+                    <label class="d-block fw-bold fs-14 mb-6">Số lượng:</label>
+                    <input id="quantity" name="quantity" class="w-100" value="{{ $product->quantity }}">
+                    <span class="d-block validation form-text text-danger d-none" for="quantity"></span>
+                </div>
+                
+                <div class="">
+                    <label class="d-block fw-bold fs-14 mb-6">Đơn vị:</label>
+                    <input id="unit_val" type="text" name="unit_id" hidden>
+                    <input id="unit_list" class="w-100 bg-white">
+                    <span class="d-block validation form-text text-danger d-none" for="unit_id"></span>
+                </div>
+            </div>
+            
+            <div class="mb-10">
+                <label class="d-block fw-bold fs-14 mb-6">Danh mục (<span class="text-danger">*</span>):</label>
+                <input id="categories_val" type="text" name="category_ids" hidden>
+                <input id="categories_list" class="w-100" placeholder="Gõ để tìm kiếm">
+                <span class="d-block validation form-text text-danger d-none" for="category_ids"></span>
+            </div>
+        
+            <div class="d-flex mb-10">
+                <div class="me-3">
+                    <label class="d-block fw-bold fs-14 mb-6">Chi phí:</label>
+                    <input id="cost" name="cost" class="w-100" value="{{ $product->cost }}">
+                    <span class="d-block validation form-text text-danger d-none" for="cost"></span>
+                </div>
+                
+                <div>
+                    <label class="d-block fw-bold fs-14 mb-6">Giá bán:</label>
+                    <input id="price" name="price" class="w-100" value="{{ $product->price }}">
+                    <span class="d-block validation form-text text-danger d-none" for="price"></span>
+                </div>
+            </div>
+        
+            <div class="mb-10">
+                <label class="d-block fw-bold fs-14 mb-6">Mô tả sản phẩm:</label>
+                <textarea name="description" id="description" rows="3" class="w-100">{{ $product->description }}</textarea>
+                <span class="d-block validation form-text text-danger d-none" for="description"></span>
+            </div>
+        
+            <div class="mt-10">
+                <button type="button" class="btn btn-success bt-green me-6" onclick="save()">{{ $flag == 'modify' ? 'Cập nhật' : 'Tạo mới' }}</button>
+                <a href="/product/index" class="btn btn-warning"> Hủy bỏ</a>
+            </div>
+        </div>
+    </form>
+
 </div>
 
-<form class="d-flex mt-40">
-
-    <div class="d-flex flex-column me-5 mt-2">
-        <img id="thumbnail" src="<?php echo asset('storage/'.$product->thumb_path); ?>" width="150" height="150">
-        <input id="thumbnail_input" type="file" name="thumbnail" accept="image/x-png,image/gif,image/jpeg" hidden>
-        <button class="btn btn-sm btn-outline-primary mt-2" type="button" onclick="$('#thumbnail_input').click()"> 
-            Chọn hình
-        </button>
-    </div>
-
-    <div class="d-flex flex-column"  style="width:400px">
-        <div class="mb-10">
-            <label class="d-block fw-bold mb-6 fs">Tên sản phẩm (<span class="text-danger">*</span>):</label>
-            <input id="name" name="name" class="w-100" value="{{ $product->name }}">
-            <span class="d-block validation form-text text-danger d-none" for="name"></span>
-        </div>
-    
-        <div class="d-flex mb-10">
-            <div class="me-3">
-                <label class="d-block fw-bold fs-14 mb-6">Số lượng:</label>
-                <input id="quantity" name="quantity" class="w-100" value="{{ $product->quantity }}">
-                <span class="d-block validation form-text text-danger d-none" for="quantity"></span>
-            </div>
-            
-            <div class="">
-                <label class="d-block fw-bold fs-14 mb-6">Đơn vị:</label>
-                <input id="unit_val" type="text" name="unit_id" hidden>
-                <input id="unit_list" class="w-100 bg-white">
-                <span class="d-block validation form-text text-danger d-none" for="unit_id"></span>
-            </div>
-        </div>
-        
-        <div class="mb-10">
-            <label class="d-block fw-bold fs-14 mb-6">Danh mục (<span class="text-danger">*</span>):</label>
-            <input id="categories_val" type="text" name="category_ids" hidden>
-            <input id="categories_list" class="w-100" placeholder="Gõ để tìm kiếm">
-            <span class="d-block validation form-text text-danger d-none" for="category_ids"></span>
-        </div>
-    
-        <div class="d-flex mb-10">
-            <div class="me-3">
-                <label class="d-block fw-bold fs-14 mb-6">Chi phí:</label>
-                <input id="cost" name="cost" class="w-100" value="{{ $product->cost }}">
-                <span class="d-block validation form-text text-danger d-none" for="cost"></span>
-            </div>
-            
-            <div>
-                <label class="d-block fw-bold fs-14 mb-6">Giá bán:</label>
-                <input id="price" name="price" class="w-100" value="{{ $product->price }}">
-                <span class="d-block validation form-text text-danger d-none" for="price"></span>
-            </div>
-        </div>
-    
-        <div class="mb-10">
-            <label class="d-block fw-bold fs-14 mb-6">Mô tả sản phẩm:</label>
-            <textarea name="description" id="description" rows="3" class="w-100">{{ $product->description }}</textarea>
-            <span class="d-block validation form-text text-danger d-none" for="description"></span>
-        </div>
-    
-        <div class="mt-10">
-            <button type="button" class="btn btn-success bt-green me-6" onclick="save()">{{ $flag == 'modify' ? 'Cập nhật' : 'Tạo mới' }}</button>
-            <a href="/product/index" class="btn btn-warning"> Hủy bỏ</a>
-        </div>
-    </div>
-</form>
 
 @endsection
 

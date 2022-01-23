@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImportorders extends Migration
+class UserrolesRolename extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateImportorders extends Migration
      */
     public function up()
     {
-        Schema::create('importorders', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        //
+        Schema::dropIfExists('UserRoles');
+        Schema::create('UserRoles', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->string('role',50);
+            $table->string('role_name',50);
         });
     }
 
@@ -26,6 +29,7 @@ class CreateImportorders extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('importorders');
+        //
+        Schema::dropIfExists('UserRoles');
     }
 }

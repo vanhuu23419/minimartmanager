@@ -1,4 +1,8 @@
-@extends('layouts.sell')
+@extends('layouts.layout')
+
+@section('pageStyles')
+    <link rel="stylesheet" href="{{ asset('/css/sell.css') }}">
+@endsection
 
 @section('content')
 

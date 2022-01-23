@@ -6,6 +6,8 @@
 @extends('layouts.layout')
 @section('content')
 
+    <div class="container mt-40">
+
     @include('shared.grid_view.grid_view', [
         'pageTitle' => $pageTitle,
         'currentPage' => $currentPage,
@@ -15,6 +17,9 @@
         'records' => $categories,
         'router' => $router
     ])
+
+    </div>
+
 
 @endsection
 

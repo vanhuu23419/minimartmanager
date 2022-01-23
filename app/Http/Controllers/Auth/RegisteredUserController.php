@@ -47,7 +47,8 @@ class RegisteredUserController extends Controller
         ]);
 
         $userId = User::max('id');
-        UserRole::create(['user_id' => $userId, 'role' => 'admin']);
+        UserRole::create(['user_id' => $userId, 'role' => 'admin', 'role_name' => 'Admin']);
+        UserRole::create(['user_id' => $userId, 'role' => 'cashier', 'role_name' => 'Nhân viên bán hàng']);
 
         event(new Registered($user));
 

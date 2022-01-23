@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth\RoleClaims;
 
 use App\Models\User;
+use App\Models\UserRole;
 
 class RoleClaims
 {
@@ -13,8 +14,35 @@ class RoleClaims
   protected static $roleClaims = [
     Roles::Admin => [
       Claims::ProductIndex,
+      Claims::ProductEdit,
+      Claims::ProductStore,
+      Claims::ProductDestroy,
+
+      Claims::CategoryIndex,
+      Claims::CategoryEdit,
+      Claims::CategoryStore,
+      Claims::CategoryDestroy,
+
+      Claims::SellIndex,
+      Claims::SellProducts,
+      Claims::SellAddToReceipt,
+      Claims::SellSaveReceipt,
+      Claims::SellPrintReceipt,
+  
+      Claims::ReceiptIndex,
+      Claims::ReceiptDestroy,
+  
+      Claims::ReportIndex,
+      Claims::ReportChartReport,
     ],
-    Roles::Cashier => []
+    Roles::Cashier => [
+
+      Claims::SellIndex,
+      Claims::SellProducts,
+      Claims::SellAddToReceipt,
+      Claims::SellSaveReceipt,
+      Claims::SellPrintReceipt,
+    ]
   ];
 
   /**
@@ -25,9 +53,18 @@ class RoleClaims
    */
   public static function isClaimed(User $user, string $ability)
   {
-    $roles = $user->roles;
+    $roles = 
+      UserRole::selectRaw('
+        user_id,
+        GROUP_CONCAT(role) as roles
+      ')
+      ->where('user_id', '=', $user->id)
+      ->groupBy(['user_id'])
+      ->first()->roles;
+    $roles = explode(',', $roles);
+
     foreach ($roles as $role) {
-      if (in_array($ability, RoleClaims::$roleClaims[$role->role])) {
+      if (in_array($ability, RoleClaims::$roleClaims[$role])) {
         return true;
       }
     }

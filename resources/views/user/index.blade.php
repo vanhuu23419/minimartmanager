@@ -6,19 +6,20 @@
 @extends('layouts.layout')
 @section('content')
 
-<div class="container mt-40">
+    <div class="container mt-40">
+
     @include('shared.grid_view.grid_view', [
         'pageTitle' => $pageTitle,
         'currentPage' => $currentPage,
         'pageSize' => $pageSize,
         'totalItems' => $totalItems,
         'paginationOffset' => $paginationOffset,
-        'records' => $receipts,
-        'router' => $router,
-        'search' => false,
-        'create' => false,
+        'records' => $users,
+        'router' => $router
     ])
-</div>
+
+    </div>
+
 
 @endsection
 
@@ -31,7 +32,7 @@
                 name: 'grid',
                 recid: 'id',
                 multiSelect: true,
-                records: <?php echo json_encode($receipts); ?>,
+                records: <?php echo json_encode($users); ?>,
                 show: { 
                     footer:true, selectColumn: true,
                     toolbar: true, toolbarDelete: true, toolbarEdit: true 
@@ -39,37 +40,23 @@
                 onReload: function() { window.location.href = '{{ $route }}'; },
                 onEdit: function (event) {
                     var selected = this.getSelection()[0];
-                    window.open(  `/sell/printReceipt/${selected}?print=no`  ) ;
+                    window.location.href = `/user/edit/modify/${selected}`;
                 },
                 msgDelete: 'Bạn có muốn xóa {{ $tableName }} đã chọn?',
                 onDelete: function (event) {
                     var that = this;
                     var selected = that.getSelection();
                     event.onComplete = async (e) => {
-                        await fetch('/receipt/destroy' + '?ids='+selected.join(',')+'&_token={{ csrf_token() }}', {method:"post"});
+                        var action = '{{ route('user.destroy') }}';
+                        await fetch(action + '?ids='+selected.join(','));
                     }
                 },
                 columns: [
-                    { field: 'id', text: 'Mã hóa đơn', size: '100px' },
-                    { field: 'time', text: 'Ngày tạo' },
-                    { field: 'num_products', text: 'Số lượng' },
-                    { field: 'totalRevenue', text: 'Tổng', render: (rec) => toCurrency(rec.totalRevenue) + ' đ' },
-                    { field: 'received', text: 'Đã nhận', render: (rec) => toCurrency(rec.received) + ' đ' },
-                    { field: 'change', text: 'Tiền thối', render: (rec) => toCurrency(rec.change) + ' đ' },
+                    { field: 'id', text: 'ID', size: '50px' },
+                    { field: 'name', text: 'Tên danh mục' },
+                    { field: 'email', text: 'Email' },
+                    { field: 'role_name', text: 'Vai trò' },
                 ],
-                toolbar: {
-                    items: [
-                        { type: 'break' },
-                        { 
-                            type: 'html',  id: 'fromDate', 
-                            html: `
-                            <div class="">
-                                <span class="fs-12 me-6">Từ ngày:</span><input name="fromDate" type="us-date" value="{{ request()->get('fromDate') }}">
-                            </div>
-                            ` 
-                        },
-                    ]
-                },
                 onRender: function(e) {
                     e.onComplete = async () => {
 
@@ -80,10 +67,11 @@
                         //
                         w2ui['grid'].toolbar.remove('w2ui-search');
                         w2ui['grid'].toolbar.remove('w2ui-break0');
-                        $('input[name="fromDate"]').w2field('date');
-                        $('input[name="fromDate"]').change((e) => {
-                            window.location = "/receipt?fromDate=" + $(e.target).val();
-                        });
+                        // Change to Vietnamese text for button
+                        setTimeout(() => {
+                            $('#tb_grid_toolbar_item_w2ui-edit .w2ui-tb-text').text('Chỉnh sửa');
+                            $('#tb_grid_toolbar_item_w2ui-delete .w2ui-tb-text').text('Xóa');
+                        }, 1000);
                     }
                 }
             });

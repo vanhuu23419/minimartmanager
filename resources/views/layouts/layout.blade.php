@@ -9,7 +9,7 @@
     <title>Minimart Manager</title>
 
     <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="{{ asset('libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- W2ui CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/w2ui@1.5.3/w2ui-1.5.min.css">
     <!-- Remix Icon -->
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/ach.ultilities.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/w2ui-custom.css') }}">
+
+    @yield('pageStyles')
 </head>
 <body>
 
@@ -64,17 +66,15 @@
 
    </header>
 
-   <main class="my-40">
-       <div class="container">
+   <main>
 
-            @yield('content')
-        </div>
+        @yield('content')
    </main>
     
     <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('libs/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap Script CND -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="{{ asset('libs/bootstrap/bootstrap.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- W2ui JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/w2ui@1.5.3/w2ui-1.5.min.js"></script>
 

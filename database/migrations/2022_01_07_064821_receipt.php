@@ -13,6 +13,10 @@ class Receipt extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('POSShifts');
+        Schema::dropIfExists('Receipts');
+        Schema::dropIfExists('ReceiptProducts');
+
         // POSShift
         Schema::create('POSShifts', function(Blueprint $table) {
             $table->increments('id');
@@ -27,15 +31,17 @@ class Receipt extends Migration
             $table->integer('shift_id')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->string('status', 10)->default('saved');
-            $table->decimal('total', 8,2, true)->default(0);
-            $table->decimal('change', 8,2, true)->default(0);
-            $table->decimal('received', 8,2, true)->default(0);
+            $table->double('total_revenue', null, 2, true)->default(0);
+            $table->double('total_profit', null, 2, true)->default(0);
+            $table->double('received', null, 2, true)->default(0);
+            $table->double('change', null, 2, true)->default(0);
             $table->smallInteger('num_products', false, true)->default(0);
         });
         // ReceiptProduct
         Schema::create('ReceiptProducts', function(Blueprint $table) {
             $table->integer('product_id')->nullable();
             $table->integer('receipt_id')->nullable();
+            $table->integer('shift_id')->nullable();
             $table->string('product_name', 255)->nullable();
             $table->decimal('product_cost', 8, 2, true)->default(0);
             $table->decimal('product_price', 8, 2, true)->default(0);
